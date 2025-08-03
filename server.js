@@ -1,3 +1,22 @@
+const express = require('express');
+const app = express();
+const path = require('path');
+
+const port = process.env.PORT || 10000;
+
+// Sert les fichiers statiques dans le dossier "public"
+app.use(express.static('public'));
+
+// Si on accède à "/", renvoyer "index.html"
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Lancer le serveur
+app.listen(port, () => {
+  console.log(`Serveur lancé sur le port ${port}`);
+});
+
 require('dotenv').config();
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
