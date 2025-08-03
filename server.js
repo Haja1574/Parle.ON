@@ -1,3 +1,5 @@
+require('dotenv').config();
+const openaiApiKey = process.env.OPENAI_API_KEY;
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
