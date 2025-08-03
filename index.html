@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correcteur Oral Français</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Corrige ton français oral</h1>
+  <textarea id="userInput" placeholder="Écris ici ta phrase..."></textarea><br>
+  <button onclick="corrigerTexte()">Corriger</button>
+  <div id="result"></div>
+
+  <script>
+    async function corrigerTexte() {
+      const message = document.getElementById('userInput').value;
+
+      const response = await fetch('https://parleon.onrender.com/correction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      document.getElementById('result').textContent = data.correction || 'Erreur lors de la correction';
+    }
+  </script>
+</body>
+</html>
